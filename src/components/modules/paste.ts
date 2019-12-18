@@ -159,6 +159,8 @@ export default class Paste extends Module {
     const plainData = dataTransfer.getData('text/plain');
     let htmlData  = dataTransfer.getData('text/html');
 
+    console.log('@@@@' + htmlData);
+
     /**
      *  If text was drag'n'dropped, wrap content with P tag to insert it as the new Block
      */

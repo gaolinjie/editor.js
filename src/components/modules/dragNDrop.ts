@@ -28,6 +28,8 @@ export default class DragNDrop extends Module {
     this.Editor.Listeners.on(this.Editor.UI.nodes.holder, 'drop', this.processDrop, true);
 
     this.Editor.Listeners.on(this.Editor.UI.nodes.holder, 'dragstart', (dragEvent: DragEvent) => {
+      console.log('dragstart@@@@');
+      // dragEvent.dataTransfer.setData('text/plain', '@@@@@@@@');
 
       if (SelectionUtils.isAtEditor && !SelectionUtils.isCollapsed) {
         this.isStartedAtEditor = true;
@@ -46,6 +48,8 @@ export default class DragNDrop extends Module {
    * @param {DragEvent} dropEvent
    */
   private processDrop = async (dropEvent: DragEvent): Promise<void> => {
+    console.log('drop@@@@@@@@@@' + this.Editor.BlockManager.currentBlockIndex);
+
     const {
       BlockManager,
       Caret,
@@ -62,19 +66,26 @@ export default class DragNDrop extends Module {
 
     this.isStartedAtEditor = false;
 
+    const currentIndex = this.Editor.BlockManager.currentBlockIndex;
+    const targetBlock = BlockManager.getBlockByChildNode(dropEvent.target as Node);
+    this.Editor.BlockManager.insertAfter(targetBlock, this.Editor.BlockManager.currentBlock);
+    // this.Editor.BlockManager.removeBlock(currentIndex);
+
     /**
      * Try to set current block by drop target.
      * If drop target (error will be thrown) is not part of the Block, set last Block as current.
      */
     try {
       const targetBlock = BlockManager.setCurrentBlockByChildNode(dropEvent.target as Node);
-
+      console.log('!!!!!!!!!!!!!');
       this.Editor.Caret.setToBlock(targetBlock, Caret.positions.END);
     } catch (e) {
       const targetBlock = BlockManager.setCurrentBlockByChildNode(BlockManager.lastBlock.holder);
 
       this.Editor.Caret.setToBlock(targetBlock, Caret.positions.END);
     }
+
+    console.log(dropEvent.dataTransfer);
 
     Paste.processDataTransfer(dropEvent.dataTransfer, true);
   }

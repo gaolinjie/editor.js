@@ -508,6 +508,8 @@ export default class BlockManager extends Module {
    *  @throws Error  - when passed Node is not included at the Block
    */
   public setCurrentBlockByChildNode(childNode: Node): Block {
+
+    // document.body.removeChild(toolbar);
     /**
      * If node is Text TextNode
      */
@@ -518,11 +520,31 @@ export default class BlockManager extends Module {
     const parentFirstLevelBlock = (childNode as HTMLElement).closest(`.${Block.CSS.wrapper}`);
 
     if (parentFirstLevelBlock) {
+      // parentFirstLevelBlock.append(toolbar);
       /**
        * Update current Block's index
        * @type {number}
        */
+      const oldCurrentIndex = this.currentBlockIndex;
       this.currentBlockIndex = this._blocks.nodes.indexOf(parentFirstLevelBlock as HTMLElement);
+
+      if (this.currentBlockIndex != oldCurrentIndex) {
+        console.log('oldCurrentIndex: ' + oldCurrentIndex);
+        console.log('currentBlockIndex: ' + this.currentBlockIndex);
+        const toolbar = document.querySelector('.ce-toolbar');
+        this.currentBlock.holder.append(toolbar);
+
+        /**
+     * Move and open toolbar
+     */
+        this.Editor.Toolbar.open();
+
+    /**
+     * Hide the Plus Button
+     */
+        this.Editor.Toolbar.plusButton.hide();
+      }
+
       return this.currentBlock;
     } else {
       throw new Error('Can not find a Block from this child Node');
@@ -588,6 +610,10 @@ export default class BlockManager extends Module {
      * Add empty modifier
      */
     this.Editor.UI.checkEmptiness();
+  }
+
+  public insertAfter(targetBlock: Block, newBlock: Block): void {
+    this._blocks.insertAfter(targetBlock, newBlock);
   }
 
   /**

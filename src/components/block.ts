@@ -560,8 +560,10 @@ export default class Block {
    * @returns {HTMLDivElement}
    */
   private compose(): HTMLDivElement {
-    const wrapper = $.make('div', Block.CSS.wrapper) as HTMLDivElement,
-      contentNode = $.make('div', Block.CSS.content),
+    const wrapper = $.make('div', Block.CSS.wrapper, {
+      draggable: true,
+    }) as HTMLDivElement,
+      contentNode = $.make('div', Block.CSS.content, {draggable: false}),
       pluginsContent  = this.tool.render();
 
     contentNode.appendChild(pluginsContent);

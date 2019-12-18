@@ -296,16 +296,23 @@ export default class UI extends Module {
       (event) => this.redactorClicked(event as MouseEvent),
       false,
     );
+    /*
     this.Editor.Listeners.on(this.nodes.redactor,
       'mousedown',
       (event) => this.documentTouched(event as MouseEvent),
       true,
+    );*/
+    this.Editor.Listeners.on(this.nodes.redactor,
+      'mousemove',
+      (event) => this.documentMoved(event as MouseEvent),
+      true,
     );
+    /*
     this.Editor.Listeners.on(this.nodes.redactor,
       'touchstart',
       (event) => this.documentTouched(event as MouseEvent),
       true,
-    );
+    );*/
 
     this.Editor.Listeners.on(document, 'keydown', (event) => this.documentKeydown(event as KeyboardEvent), true);
     this.Editor.Listeners.on(document, 'click', (event) => this.documentClicked(event as MouseEvent), true);
@@ -517,6 +524,51 @@ export default class UI extends Module {
   }
 
   /**
+   * move
+   *
+   * Used to change current block — we need to do it before 'selectionChange' event.
+   * Also:
+   * - Move and show the Toolbar
+   * - Set a Caret
+   */
+  private documentMoved(event: MouseEvent | TouchEvent): void {
+    let clickedNode = event.target as HTMLElement;
+
+    /**
+     * If click was fired is on Editor`s wrapper, try to get clicked node by elementFromPoint method
+     */
+    if (clickedNode === this.nodes.redactor) {
+      const clientX = event instanceof MouseEvent ? event.clientX : event.touches[0].clientX;
+      const clientY = event instanceof MouseEvent ? event.clientY : event.touches[0].clientY;
+
+      clickedNode = document.elementFromPoint(clientX, clientY) as HTMLElement;
+    }
+
+    /**
+     * Select clicked Block as Current
+     */
+    try {
+      /**
+       * Renew Current Block
+       */
+      this.Editor.BlockManager.setCurrentBlockByChildNode(clickedNode);
+
+      /**
+       * Highlight Current Node
+       */
+      this.Editor.BlockManager.highlightCurrentNode();
+    } catch (e) {
+      /**
+       * If clicked outside first-level Blocks and it is not RectSelection, set Caret to the last empty Block
+       */
+      if (!this.Editor.RectangleSelection.isRectActivated()) {
+        this.Editor.Caret.setToTheLastBlock();
+      }
+    }
+
+  }
+
+  /**
    * First touch on editor
    * Fired before click
    *
@@ -560,15 +612,6 @@ export default class UI extends Module {
       }
     }
 
-    /**
-     * Move and open toolbar
-     */
-    this.Editor.Toolbar.open();
-
-    /**
-     * Hide the Plus Button
-     */
-    this.Editor.Toolbar.plusButton.hide();
   }
 
   /**

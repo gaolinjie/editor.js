@@ -151,6 +151,7 @@ export default class Blocks {
    * @param {Boolean} replace — it true, replace block on given index
    */
   public insert(index: number, block: Block, replace: boolean = false): void {
+    console.log('@@@-blocks-insert-index: ' + index);
     if (!this.length) {
       this.push(block);
       return;
