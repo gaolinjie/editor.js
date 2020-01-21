@@ -102,20 +102,20 @@ export default class BlockSettings extends Module {
   public open(): void {
     this.nodes.wrapper.classList.add(this.CSS.wrapperOpened);
 
-    /**
-     * Fill Tool's settings
-     */
-    this.addToolSettings();
+    // /**
+    //  * Fill Tool's settings
+    //  */
+    // this.addToolSettings();
 
-    /**
-     * Add default settings that presents for all Blocks
-     */
-    this.addDefaultSettings();
+    // /**
+    //  * Add default settings that presents for all Blocks
+    //  */
+    // this.addDefaultSettings();
 
-    /** Tell to subscribers that block settings is opened */
-    this.Editor.Events.emit(this.events.opened);
+    // /** Tell to subscribers that block settings is opened */
+    // this.Editor.Events.emit(this.events.opened);
 
-    this.flipper.activate(this.blockTunesButtons);
+    // this.flipper.activate(this.blockTunesButtons);
   }
 
   /**

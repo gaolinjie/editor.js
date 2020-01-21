@@ -641,18 +641,18 @@ export default class UI extends Module {
      * - Block is an initial-block (Text)
      * - Block is empty
      */
-    const isInitialBlock = this.Editor.Tools.isInitial(this.Editor.BlockManager.currentBlock.tool);
+    // const isInitialBlock = this.Editor.Tools.isInitial(this.Editor.BlockManager.currentBlock.tool);
 
-    if (isInitialBlock) {
-      /**
-       * Check isEmpty only for paragraphs to prevent unnecessary tree-walking on Tools with many nodes (for ex. Table)
-       */
-      const isEmptyBlock = this.Editor.BlockManager.currentBlock.isEmpty;
+    // if (isInitialBlock) {
+    //   /**
+    //    * Check isEmpty only for paragraphs to prevent unnecessary tree-walking on Tools with many nodes (for ex. Table)
+    //    */
+    //   const isEmptyBlock = this.Editor.BlockManager.currentBlock.isEmpty;
 
-      if (isEmptyBlock) {
-        this.Editor.Toolbar.plusButton.show();
-      }
-    }
+    //   if (isEmptyBlock) {
+    //     this.Editor.Toolbar.plusButton.show();
+    //   }
+    // }
   }
 
   /**

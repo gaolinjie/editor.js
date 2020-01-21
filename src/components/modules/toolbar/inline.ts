@@ -178,7 +178,7 @@ export default class InlineToolbar extends Module {
 
     this.move();
     this.open();
-    this.Editor.Toolbar.close();
+    // this.Editor.Toolbar.close();
 
     /** Check Tools state for selected fragment */
     this.checkToolsState();

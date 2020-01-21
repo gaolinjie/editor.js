@@ -1,6 +1,6 @@
 {
-  "name": "@editorjs/editorjs",
-  "version": "2.16.0",
+  "name": "@gaolinjie/editorjs",
+  "version": "2.17.0",
   "description": "Editor.js — Native JS, based on API and Open Source",
   "main": "dist/editor.js",
   "types": "./types/index.d.ts",
@@ -21,11 +21,11 @@
     "pull_tools": "git submodule update --init --recursive",
     "checkout_tools": "git submodule foreach git pull origin master"
   },
-  "author": "CodeX",
+  "author": "gaolinjie",
   "license": "Apache-2.0",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/codex-team/editor.js.git"
+    "url": "git+https://github.com/gaolinjie/editor.js.git"
   },
   "devDependencies": {
     "@babel/core": "^7.3.4",

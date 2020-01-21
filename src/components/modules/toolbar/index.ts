@@ -115,7 +115,7 @@ export default class Toolbar extends Module {
      */
     this.nodes.plusButton = $.make('div', this.CSS.plusButton);
     $.append(this.nodes.plusButton, $.svg('plus', 14, 14));
-    $.append(this.nodes.content, this.nodes.plusButton);
+    $.append(this.nodes.actions, this.nodes.plusButton);
 
     this.Editor.Listeners.on(this.nodes.plusButton, 'click', () => this.plusButtonClicked(), false);
 
@@ -197,6 +197,15 @@ export default class Toolbar extends Module {
     const blockHeight = currentBlock.offsetHeight;
     let toolbarY = currentBlock.offsetTop;
 
+    let innerToolbarY;
+    const currentBlockInner = currentBlock.firstElementChild.firstElementChild;
+    const paddingTop = Number(window.getComputedStyle(currentBlockInner).paddingTop.replace('px', ''));
+    const marginTop = Number(window.getComputedStyle(currentBlockInner).marginTop.replace('px', ''));
+    console.log('paddingTop: ' + window.getComputedStyle(currentBlockInner).paddingTop.replace('px', ''));
+    console.log('marginTop: ' + window.getComputedStyle(currentBlockInner).marginTop.replace('px', ''));
+    const currentBlockInnerEm =  paddingTop + marginTop;
+
+    toolbarY = toolbarY + currentBlockInnerEm - 4;
     /**
      * 1) On desktop — Toolbar at the top of Block, Plus/Toolbox moved the center of Block
      * 2) On mobile — Toolbar at the bottom of Block
@@ -204,8 +213,8 @@ export default class Toolbar extends Module {
     if (!isMobile) {
       const contentOffset = Math.floor(blockHeight / 2);
 
-      this.nodes.plusButton.style.transform = `translate3d(0, calc(${contentOffset}px - 50%), 0)`;
-      this.Editor.Toolbox.nodes.toolbox.style.transform = `translate3d(0, calc(${contentOffset}px - 50%), 0)`;
+      // this.nodes.plusButton.style.transform = `translate3d(-26px, calc(${contentOffset}px - 50%), 0)`;
+      // this.Editor.Toolbox.nodes.toolbox.style.transform = `translate3d(0, calc(${contentOffset}px - 50%), 0)`;
     } else {
       toolbarY += blockHeight;
     }

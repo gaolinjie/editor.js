@@ -1,6 +1,6 @@
 .ce-toolbar {
   position: absolute;
-  left: 0;
+  left: 60px;
   right: 0;
   top: 0;
   /*opacity: 0;*/
@@ -62,8 +62,16 @@
 
   &__plus,
   .ce-toolbox {
+    /*
     top: 50%;
     transform: translateY(-50%);
+    */
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    color: #707684;
+    cursor: pointer;
+    text-align: center;
   }
 
   /**
@@ -90,7 +98,7 @@
     }
 
     &-buttons {
-      text-align: right;
+      text-align: center;
     }
   }
 
