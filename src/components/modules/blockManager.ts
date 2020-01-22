@@ -542,7 +542,7 @@ export default class BlockManager extends Module {
     /**
      * Hide the Plus Button
      */
-        this.Editor.Toolbar.plusButton.hide();
+        // this.Editor.Toolbar.plusButton.hide();
       }
 
       return this.currentBlock;

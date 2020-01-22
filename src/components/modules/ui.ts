@@ -465,7 +465,7 @@ export default class UI extends Module {
        * Move toolbar and show plus button because new Block is empty
        */
       this.Editor.Toolbar.move();
-      this.Editor.Toolbar.plusButton.show();
+      // this.Editor.Toolbar.plusButton.show();
     }
 
     this.Editor.BlockSelection.clearSelection(event);
@@ -511,7 +511,8 @@ export default class UI extends Module {
       if (Selection.anchorNode === this.nodes.redactor) {
         this.Editor.Caret.setToTheLastBlock();
       } else {
-        this.Editor.BlockManager.setCurrentBlockByChildNode(Selection.anchorNode);
+        // @@@ need confirm!!!
+        // this.Editor.BlockManager.setCurrentBlockByChildNode(Selection.anchorNode);
       }
     }
 

@@ -319,7 +319,7 @@ export default class BlockEvents extends Module {
       /**
        * Show Plus Button
        */
-      this.Editor.Toolbar.plusButton.show();
+      // this.Editor.Toolbar.plusButton.show();
     }
 
     event.preventDefault();
@@ -573,7 +573,7 @@ export default class BlockEvents extends Module {
   private activateToolbox(): void {
     if (!this.Editor.Toolbar.opened) {
       this.Editor.Toolbar.open(false , false);
-      this.Editor.Toolbar.plusButton.show();
+      // this.Editor.Toolbar.plusButton.show();
     }
 
     this.Editor.Toolbox.open();
@@ -586,7 +586,7 @@ export default class BlockEvents extends Module {
     if (!this.Editor.Toolbar.opened) {
       this.Editor.BlockManager.currentBlock.focused = true;
       this.Editor.Toolbar.open(true, false);
-      this.Editor.Toolbar.plusButton.hide();
+      // this.Editor.Toolbar.plusButton.hide();
     }
 
     /**
