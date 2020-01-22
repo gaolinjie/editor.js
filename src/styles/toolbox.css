@@ -4,7 +4,8 @@
   transition: opacity 100ms ease;
   will-change: opacity;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
+  min-width: 220px;
 
   @media (--mobile){
     position: static;
@@ -19,8 +20,67 @@
   }
 
   &__button {
-    @apply --toolbox-button;
-    flex-shrink: 0;
+    color: rgb(36, 42, 49);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    white-space: pre;
+    vertical-align: middle;
+    -webkit-box-align: center;
+    margin: 0px;
+    padding: 4px 16px;
+    text-decoration: none;
+
+    &:hover {
+      background: rgb(245, 247, 249);
+    }
+
+    &-icon {
+      color: rgb(157, 170, 182);
+    display: inline-flex;
+    font-size: 18px;
+    margin: 0px 8px 0px 0px;
+    padding: 0px;
+
+      svg {
+        width: 14px;
+    height: 14px;
+    vertical-align: middle;
+      }
+    }
+    
+
+    &-name {
+      display: block;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    margin: 0px;
+    padding: 0px;
+    overflow: hidden;
+
+    span {
+      font-size: 14px;
+      font-family: Roboto, sans-serif;
+      font-weight: 500;
+      line-height: 1.5;
+    }
+      
+    }
+
+    &-shortcut {
+      color: rgb(157, 170, 182);
+    display: inline-flex;
+    margin: 0px 0px 0px auto;
+    padding: 0px 0px 0px 8px;
+
+    span {
+      font-size: 14px;
+    font-family: Roboto, sans-serif;
+    font-weight: 500;
+    line-height: 1.5;
+    }
+    
+    }
   }
 }
 

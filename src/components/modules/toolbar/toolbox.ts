@@ -30,6 +30,10 @@ export default class Toolbox extends Module {
       toolboxOpened: 'ce-toolbox--opened',
       openedToolbarHolderModifier: 'codex-editor--toolbox-opened',
 
+      toolboxButtonIcon: 'ce-toolbox__button-icon',
+      toolboxButtonName: 'ce-toolbox__button-name',
+      toolboxButtonShortcut: 'ce-toolbox__button-shortcut',
+
       buttonTooltip: 'ce-toolbox-button-tooltip',
       buttonShortcut: 'ce-toolbox-button-tooltip__shortcut',
     };
@@ -182,7 +186,19 @@ export default class Toolbox extends Module {
     const button = $.make('li', [ this.CSS.toolboxButton ]);
 
     button.dataset.tool = toolName;
-    button.innerHTML = userToolboxSettings.icon || toolToolboxSettings.icon;
+
+    const buttonIcon = $.make('div', [ this.CSS.toolboxButtonIcon ]);
+    buttonIcon.innerHTML = userToolboxSettings.icon || toolToolboxSettings.icon;
+    button.appendChild(buttonIcon);
+
+    const buttonName = $.make('div', [ this.CSS.toolboxButtonName ]);
+    const buttonNameSpan = $.make('span', []);
+    buttonNameSpan.appendChild($.text(toolName));
+    buttonName.appendChild(buttonNameSpan);
+    button.appendChild(buttonName);
+
+    const buttonShortcut = this.drawShortcut(toolName);
+    button.appendChild(buttonShortcut);
 
     $.append(this.nodes.toolbox, button);
 
@@ -196,15 +212,15 @@ export default class Toolbox extends Module {
       this.toolButtonActivate(event, toolName);
     });
 
-    /**
-     * Add listeners to show/hide toolbox tooltip
-     */
-    const tooltipContent = this.drawTooltip(toolName);
+    // /**
+    //  * Add listeners to show/hide toolbox tooltip
+    //  */
+    // const tooltipContent = this.drawTooltip(toolName);
 
-    this.Editor.Tooltip.onHover(button, tooltipContent, {
-      placement: 'bottom',
-      hidingDelay: 200,
-    });
+    // this.Editor.Tooltip.onHover(button, tooltipContent, {
+    //   placement: 'bottom',
+    //   hidingDelay: 200,
+    // });
 
     /**
      * Enable shortcut
@@ -217,6 +233,28 @@ export default class Toolbox extends Module {
 
     /** Increment Tools count */
     this.displayedToolsCount++;
+  }
+
+  /**
+   * Draw tooltip for toolbox tools
+   *
+   * @param {String} toolName - toolbox tool name
+   * @return { HTMLElement }
+   */
+  private drawShortcut(toolName: string): HTMLElement {
+    const divShortcut = $.make('div', [ this.CSS.toolboxButtonShortcut ]);
+    const spanShortcut = $.make('span', []);
+
+    const toolSettings = this.Editor.Tools.getToolSettings(toolName);
+    let shortcut = toolSettings[this.Editor.Tools.USER_SETTINGS.SHORTCUT];
+
+    if (shortcut) {
+      shortcut = _.beautifyShortcut(shortcut);
+      spanShortcut.appendChild($.text(shortcut));
+      divShortcut.appendChild(spanShortcut);
+    }
+
+    return divShortcut;
   }
 
   /**

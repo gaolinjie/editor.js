@@ -476,6 +476,7 @@ export default class UI extends Module {
    * @param {MouseEvent} event - Click
    */
   private documentClicked(event: MouseEvent): void {
+    console.log('!!!!!!!!!!');
     /**
      * Sometimes we emulate click on some UI elements, for example by Enter on Block Settings button
      * We don't need to handle such events, because they handled in other place.
@@ -503,18 +504,17 @@ export default class UI extends Module {
       this.Editor.ConversionToolbar.close();
     }
 
-    if (Selection.isAtEditor) {
-      /**
-       * Focus clicked Block.
-       * Workaround case when user clicks on the bottom of editor
-       */
-      if (Selection.anchorNode === this.nodes.redactor) {
-        this.Editor.Caret.setToTheLastBlock();
-      } else {
-        // @@@ need confirm!!!
-        // this.Editor.BlockManager.setCurrentBlockByChildNode(Selection.anchorNode);
-      }
-    }
+    // if (Selection.isAtEditor) {
+    //   /**
+    //    * Focus clicked Block.
+    //    * Workaround case when user clicks on the bottom of editor
+    //    */
+    //   if (Selection.anchorNode === this.nodes.redactor) {
+    //     this.Editor.Caret.setToTheLastBlock();
+    //   } else {
+    //     this.Editor.BlockManager.setCurrentBlockByChildNode(Selection.anchorNode);
+    //   }
+    // }
 
     /**
      * Clear Selection if user clicked somewhere

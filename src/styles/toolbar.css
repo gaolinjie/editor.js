@@ -8,6 +8,7 @@
   transition: opacity 100ms ease;
   will-change: opacity, transform;
   display: none;
+  z-index: 3;
 
   @media (--mobile) {
     @apply --overlay-pane;
@@ -37,7 +38,7 @@
   }
 
   &__plus {
-    @apply --toolbox-button;
+    @apply --plus-button;
 
     position: absolute;
     left: calc(var(--toolbox-buttons-size) * -1);
@@ -60,8 +61,7 @@
     }
   }
 
-  &__plus,
-  .ce-toolbox {
+  &__plus {
     /*
     top: 50%;
     transform: translateY(-50%);
@@ -72,6 +72,16 @@
     color: #707684;
     cursor: pointer;
     text-align: center;
+  }
+
+  .ce-toolbox {
+    padding: 10px 0;
+    background-color: #fff;
+    border: 1px solid #eaeaea;
+    -webkit-box-shadow: 0 3px 15px -3px rgba(13,20,33,.13);
+    box-shadow: 0 3px 15px -3px rgba(13,20,33,.13);
+    border-radius: 4px;
+    z-index: 2;
   }
 
   /**

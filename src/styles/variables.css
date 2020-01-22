@@ -50,6 +50,11 @@
   --toolbox-buttons-size: 24px;
 
   /**
+   * @@@
+   */
+   --toolbox-buttons-width: 220px;
+
+  /**
    * Confirm deletion bg
    */
   --color-confirm: #E24A4A;
@@ -86,13 +91,34 @@
   /**
    * Styles for Toolbox Buttons and Plus Button
    */
-  --toolbox-button: {
+  --plus-button: {
     color: var(--grayText);
     cursor: pointer;
     width: var(--toolbox-buttons-size);
     height: var(--toolbox-buttons-size);
     display: inline-flex;
     justify-content: center;
+    align-items: center;
+
+    &:hover,
+    &--active {
+      color: var(--color-active-icon);
+    }
+
+    &--active{
+      animation: bounceIn 0.75s 1;
+      animation-fill-mode: forwards;
+    }
+
+  };
+
+  --toolbox-button: {
+    color: var(--grayText);
+    cursor: pointer;
+    width: var(--toolbox-buttons-width);
+    height: var(--toolbox-buttons-size);
+    display: inline-flex;
+    justify-content: left;
     align-items: center;
 
     &:hover,

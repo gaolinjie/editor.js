@@ -477,7 +477,8 @@ export function beautifyShortcut(shortcut: string): string {
     .replace(/escape/gi, '⎋')
     .replace(/insert/gi, 'Ins')
     .replace(/delete/gi, '␡')
-    .replace(/\+/gi, ' + ');
+    // .replace(/\+/gi, ' + ');
+    .replace(/\+/gi, '');
 
   if (OS.mac) {
     shortcut = shortcut.replace(/ctrl|cmd/gi, '⌘').replace(/alt/gi, '⌥');
